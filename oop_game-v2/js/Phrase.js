@@ -3,7 +3,7 @@
  * Phrase.js */
 class Phrase {
    constructor(phrase) {
-     this.phrase = phrase;
+     this.phrase = phrase.toLowerCase();
    }
 
    /**
@@ -27,8 +27,32 @@ class Phrase {
      });
    }
 
-   //checkLetter() {}
-   //showMatchedLetter() {}
+   /**
+   *checks if passed letter is in phrase.
+   *@param (string) letter - letter to check.
+   */
+   checkLetter(letter) {
+      //if true returns letter.
+      return this.phrase.includes(letter);
+
+   }
+
+   /**
+   *displays passed letter on screen after a match is found.
+   *@param (string) letter - letter to display.
+   */
+   showMatchedLetter(letter) {
+     let chosenLetter = document.querySelectorAll('.letter');
+     chosenLetter.forEach(chosenLetter => {
+       if (letter === chosenLetter.textContent) {
+         chosenLetter.classList.replace('hide', 'show');
+       }
+     });
+
+
+
+
+   }
 
 
  }
