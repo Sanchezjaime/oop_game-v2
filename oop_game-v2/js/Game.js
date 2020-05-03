@@ -15,6 +15,7 @@ class Game {
      document.getElementById("overlay").style.display = "none";
      this.activePhrase = this.getRandomPhrase();
      this.activePhrase.addPhraseToDisplay();
+
    };
 
    /**
@@ -112,15 +113,15 @@ class Game {
    *resets game
    */
    resetGame() {
-     const keys = document.querySelectorAll('.keyrow button');
-     keys.forEach(key => {
-       keys.disabled = false;
-       keys.className = 'key';
+     const keyButton = document.querySelectorAll('.keyrow button');
+     keyButton.forEach((button) => {
+       button.className = 'key';
+       button.disabled = false;
      });
 
      const hearts = document.querySelectorAll('img');
-     hearts.forEach(heart => {
-       hearts.src = 'images/liveHeart.png';
+     hearts.forEach((heart) => {
+       heart.src = 'images/liveHeart.png';
      });
 
      this.missed = 0;
