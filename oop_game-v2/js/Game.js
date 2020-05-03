@@ -52,14 +52,12 @@ class Game {
        this.checkForWin();
        if (this.checkForWin()) {
          this.gameOver(true);
-       };
-
+       }
      } else {
        button.className = 'wrong';
        this.removeLife();
      }
-
-   }
+   };
 
    /**
    *checks for winning move
@@ -72,7 +70,7 @@ class Game {
      } else {
        return false;
      }
-   }
+   };
 
    /**
    *increases the value of the missed property.
@@ -87,8 +85,7 @@ class Game {
        const missedTry = document.querySelector("img[src='images/liveHeart.png']");
        missedTry.src = "images/lostHeart.png";
      }
-
-   }
+   };
 
    /**
    *displays game over messege
@@ -100,14 +97,13 @@ class Game {
      if (gameWon) {
        gameOverlay.classList = "win";
        gameOverMessage.textContent = "Congratulations you won.";
-       this.resetGame();
      }else {
        gameOverlay.classList = "lose";
        gameOverMessage.textContent = "Better luck next time. Try again.";
-       this.resetGame();
      }
      gameOverlay.style.display = "flex";
-   }
+     this.resetGame();
+   };
 
    /**
    *resets game
