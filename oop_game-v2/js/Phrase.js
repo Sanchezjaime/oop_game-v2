@@ -49,10 +49,15 @@ class Phrase {
        }
      });
 
+  }
 
-
-
-   }
+  /**
+  *removes the li elements fro the ul elements
+  */
+  resetPhrase() {
+    const phraseId = document.getElementById('phrase');
+    phraseId.innerHTML = '<ul></ul>';
+  }
 
 
  }

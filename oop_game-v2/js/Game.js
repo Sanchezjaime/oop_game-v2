@@ -39,15 +39,93 @@ class Game {
      return this.phrases[Math.floor(Math.random()*this.phrases.length)];
    };
 
-   handleInteractions() {
+   /**
+   *handles on screen keyboard button clicks.
+   *@param {HTMLButtonElement} button - the clicked button element.
+   */
+   handleInteractions(button) {
+     button.disabled = true;
+     if (this.activePhrase.checkLetter(button.textContent)) {
+       button.className = 'chosen';
+       this.activePhrase.showMatchedLetter(button.textContent);
+       this.checkForWin();
+       if (this.checkForWin()) {
+         this.gameOver(true);
+       };
+
+     } else {
+       button.className = 'wrong';
+       this.removeLife();
+     }
 
    }
 
+   /**
+   *checks for winning move
+   *@return {boolean} True if game has been won, false if game wasnt won.
+   */
    checkForWin() {
+     let phraseletter = document.querySelectorAll('.hide');
+     if (phraseletter.length === 0) {
+       return true;
+     } else {
+       return false;
+     }
+   }
 
- }
-   //removeLife() {}
-   //gameOver() {}
+   /**
+   *increases the value of the missed property.
+   *removes a life from the scoreboard.
+   *checks if player has remaining lives and ends game if player is out.
+   */
+   removeLife() {
+     this.missed += 1;
+     if (this.missed === 5) {
+       this.gameOver(false);
+     }else {
+       const missedTry = document.querySelector("img[src='images/liveHeart.png']");
+       missedTry.src = "images/lostHeart.png";
+     }
+
+   }
+
+   /**
+   *displays game over messege
+   *@param {boolean} gameWon - whether or not the user won the game.
+   */
+   gameOver(gameWon) {
+     const gameOverlay = document.getElementById('overlay');
+     const gameOverMessage = document.getElementById('game-over-message');
+     if (gameWon) {
+       gameOverlay.classList = "win";
+       gameOverMessage.textContent = "Congratulations you won.";
+       this.resetGame();
+     }else {
+       gameOverlay.classList = "lose";
+       gameOverMessage.textContent = "Better luck next time. Try again.";
+       this.resetGame();
+     }
+     gameOverlay.style.display = "flex";
+   }
+
+   /**
+   *resets game
+   */
+   resetGame() {
+     const keys = document.querySelectorAll('.keyrow button');
+     keys.forEach(key => {
+       keys.disabled = false;
+       keys.className = 'key';
+     });
+
+     const hearts = document.querySelectorAll('img');
+     hearts.forEach(heart => {
+       hearts.src = 'images/liveHeart.png';
+     });
+
+     this.missed = 0;
+     this.activePhrase.resetPhrase();
+   }
 
 
 
